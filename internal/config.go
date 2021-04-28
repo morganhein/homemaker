@@ -28,12 +28,12 @@ import (
 
 // Config stores the run configurtion
 type Config struct {
-	Tasks   map[string]task
-	Macros  map[string]macro
-	File    string
-	SrcDir  string `mapstructure:"home-src"`
-	DstDir  string `mapstructure:"home-dst"`
-	Variant string
+	Tasks    map[string]task
+	Macros   map[string]macro
+	File     string
+	SrcDir   string `mapstructure:"home-src"`
+	DstDir   string `mapstructure:"home-dst"`
+	Variants string //comma separated, FIFO priority list of variants
 
 	Clobber     bool
 	Force       bool
@@ -60,5 +60,5 @@ func (c *Config) setEnv() {
 	os.Setenv("HM_CONFIG", c.File)
 	os.Setenv("HM_SRC", c.SrcDir)
 	os.Setenv("HM_DEST", c.DstDir)
-	os.Setenv("HM_VARIANT", c.Variant)
+	os.Setenv("HM_VARIANT", c.Variants)
 }

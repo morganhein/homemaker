@@ -14,10 +14,10 @@ var _ = Describe("Config", func() {
 	Describe("Setting the environment", func() {
 		BeforeEach(func() {
 			c = Config{
-				File:    "file",
-				SrcDir:  "srcDir",
-				DstDir:  "dstDir",
-				Variant: "variant",
+				File:     "file",
+				SrcDir:   "srcDir",
+				DstDir:   "dstDir",
+				Variants: "variant",
 			}
 
 			c.setEnv()
@@ -32,16 +32,16 @@ var _ = Describe("Config", func() {
 			Expect(os.Getenv("HM_DEST")).To(Equal(c.DstDir))
 		})
 		It("Should set HM_VARIANT", func() {
-			Expect(os.Getenv("HM_VARIANT")).To(Equal(c.Variant))
+			Expect(os.Getenv("HM_VARIANT")).To(Equal(c.Variants))
 		})
 	})
 	Describe("When digesting the configuration", func() {
 		BeforeEach(func() {
 			c = Config{
-				File:    "file",
-				SrcDir:  "./../test/src",
-				DstDir:  "./../test/dst",
-				Variant: "variant",
+				File:     "file",
+				SrcDir:   "./../test/src",
+				DstDir:   "./../test/dst",
+				Variants: "variant",
 			}
 		})
 		JustBeforeEach(func() {
