@@ -131,7 +131,7 @@ func ProcessTask(taskName string, conf *Config) error {
 	conf.setEnv()
 	os.Setenv("HM_TASK", taskName)
 
-	for _, tn := range makeVariantNames(taskName, conf.Variant) {
+	for _, tn := range makeVariantNames(taskName, conf.Variants) {
 		if conf.Verbose {
 			log.Printf("starting task: %s", tn)
 		}

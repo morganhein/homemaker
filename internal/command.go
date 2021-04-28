@@ -40,7 +40,7 @@ type macro struct {
 func findCmdMacro(macroName string, conf *Config) (*macro, string) {
 	if strings.HasPrefix(macroName, "@") {
 		mn := strings.TrimPrefix(macroName, "@")
-		for _, mn := range makeVariantNames(mn, conf.Variant) {
+		for _, mn := range makeVariantNames(mn, conf.Variants) {
 			if m, ok := conf.Macros[mn]; ok {
 				return &m, mn
 			}

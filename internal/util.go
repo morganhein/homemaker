@@ -47,15 +47,25 @@ func makeAbsPath(path string) string {
 	return path
 }
 
-func makeVariantNames(name, variant string) []string {
-	if nameParts := strings.Split(name, "__"); len(nameParts) > 1 {
-		variant = nameParts[len(nameParts)-1]
-		name = strings.Join(nameParts[:len(nameParts)-1], "")
+//makeVariantNames creates a priority sorted slice of variant names
+func makeVariantNames(name, variants string) []string {
+	names := []string{}
+
+	//is the requested task a specific variant? I think that's why this is here
+	nameParts := strings.Split(name, "__")
+	if len(nameParts) > 1 {
+		names = append(names, name)
 	}
 
-	names := []string{name}
-	if len(variant) > 0 && !strings.HasSuffix(name, "__") {
-		names = []string{fmt.Sprint(name, "__", variant), name}
+	//the variants we want to try and use, in order of priority
+	vs := strings.Split(variants, ",")
+	for k, v := range vs {
+		names = append(names, fmt.Sprintf("%v__%v", k, strings.TrimSpace(v)))
+	}
+
+	//if the task wasn't a variant, add it last
+	if len(nameParts) == 1 {
+		names = append(names, name)
 	}
 
 	return names
